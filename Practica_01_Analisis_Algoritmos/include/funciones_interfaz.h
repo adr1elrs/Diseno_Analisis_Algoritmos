@@ -73,6 +73,9 @@ void ProgramaPrincipal() {
     if (opcion == 0) {
       std::cout << "Saliendo del programa.\n";
       break;
+    } else if (opcion < 0 || opcion > 2) {
+      std::cout << "Opción no válida. Intente de nuevo.\n\n";
+      continue;
     }
 
     // Pedir dimensiones de las matrices
@@ -92,45 +95,24 @@ void ProgramaPrincipal() {
       // Multiplicación por filas
       case 1: {
         solver.setAlgoritmo(std::make_unique<RowMultAlg>());
-        try {
-          Matriz resultado = solver.resolver(m1, m2);
-          std::cout << "Resultado de la multiplicación por filas:\n" << resultado << "\n";
-        } catch (const DimensionesIncompatibles& e) {
-          std::cerr << e.what() << "\n\n";
-        }
         break;
       }
       // Multiplicación por columnas
       case 2: {
         solver.setAlgoritmo(std::make_unique<ColMultAlg>());
-        try {
-          Matriz resultado = solver.resolver(m1, m2);
-          std::cout << "Resultado de la multiplicación por columnas: \n" << resultado << "\n";
-        } catch (const DimensionesIncompatibles& e) {
-          std::cerr << e.what() << "\n\n";
-        }
-        break;
-      }
-      // Ambas multiplicaciones
-      case 3: {
-        try {
-          
-          solver.setAlgoritmo(std::make_unique<RowMultAlg>());
-          Matriz resultadoFila = solver.resolver(m1, m2);
-          std::cout << "Resultado de la multiplicación por filas:\n" << resultadoFila << "\n";
-          
-          solver.setAlgoritmo(std::make_unique<ColMultAlg>());
-          Matriz resultadoColumna = solver.resolver(m1, m2);
-          std::cout << "Resultado de la multiplicación por columnas:\n" << resultadoColumna << "\n";
-        } catch (const DimensionesIncompatibles& e) {
-          std::cerr << e.what() << "\n\n";
-        }
         break;
       }
       default: {
         std::cout << "Opción no válida. Intente de nuevo.\n";
         break;
       }
+    }
+    // Realizar la multiplicación y mostrar el resultado
+    try {
+      Matriz resultado = solver.resolver(m1, m2);
+      std::cout << "Resultado de la multiplicación: \n" << resultado << "\n";
+    } catch (const DimensionesIncompatibles& e) {
+      std::cerr << e.what() << "\n\n";
     }
   }
 }
