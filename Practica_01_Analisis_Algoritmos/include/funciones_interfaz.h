@@ -104,8 +104,8 @@ void ProgramaPrincipal() {
       }
       default: {
         std::cout << "Opción no válida. Intente de nuevo.\n";
-        break;
-      }
+        continue;;
+      
     }
     // Realizar la multiplicación y mostrar el resultado
     try {
