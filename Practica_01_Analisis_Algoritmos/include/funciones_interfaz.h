@@ -13,6 +13,7 @@
 #define FUNCIONES_INTERFAZ_H
 
 #include <iostream>
+#include <chrono>
 #include "resolver_matriz.h"
 #include "matriz_exception.h"
 
@@ -24,7 +25,6 @@ void MostrarMenu() {
   std::cout << "Seleccione el algoritmo de multiplicación de matrices:\n\n";
   std::cout << "  1. Multiplicación por filas\n";
   std::cout << "  2. Multiplicación por columnas\n";
-  std::cout << "  3. Ambas multiplicaciones\n";
   std::cout << "  0. Salir\n\n";
 }
 
@@ -105,11 +105,15 @@ void ProgramaPrincipal() {
       default: {
         std::cout << "Opción no válida. Intente de nuevo.\n";
         continue;;
-      
+      }
     }
     // Realizar la multiplicación y mostrar el resultado
     try {
+      auto start = std::chrono::high_resolution_clock::now();
       Matriz resultado = solver.resolver(m1, m2);
+      auto end = std::chrono::high_resolution_clock::now();
+      auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+      std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos.\n";
       std::cout << "Resultado de la multiplicación: \n" << resultado << "\n";
     } catch (const DimensionesIncompatibles& e) {
       std::cerr << e.what() << "\n\n";

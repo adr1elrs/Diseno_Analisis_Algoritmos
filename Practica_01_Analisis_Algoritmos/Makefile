@@ -4,7 +4,7 @@ INC_DIR = include
 BUILD_DIR = build
 TARGET = matrices_main
 
-CXXFLAGS = -std=c++17 -Wall -Wextra -g -I$(INC_DIR)
+CXXFLAGS = -std=c++17 -Wall  -g -I$(INC_DIR)
 
 SRCS = $(wildcard $(SRC_DIR)/*.cc)
 OBJS = $(patsubst $(SRC_DIR)/%.cc, $(BUILD_DIR)/%.o, $(SRCS))
