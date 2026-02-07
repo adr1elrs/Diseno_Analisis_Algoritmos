@@ -113,8 +113,8 @@ void ProgramaPrincipal() {
       Matriz resultado = solver.resolver(m1, m2);
       auto end = std::chrono::high_resolution_clock::now();
       auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-      std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos.\n";
       std::cout << "Resultado de la multiplicación: \n" << resultado << "\n";
+      std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos.\n";
     } catch (const DimensionesIncompatibles& e) {
       std::cerr << e.what() << "\n\n";
     }
